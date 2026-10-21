@@ -1,0 +1,25 @@
+[
+  {
+    "difficulty": "중",
+    "year": null,
+    "session": null,
+    "type": "original",
+    "sourceUrl": "https://github.com/YunSangYeong/Industrial-Safety-Engineer-CBT/blob/main/docs/QUESTION_BANK.md",
+    "verificationStatus": "pending",
+    "reviewNote": "등록 양식 예시. 사용자가 출처·해설·정답을 확인한 후 승인해야 함.",
+    "version": "main",
+    "rights": "자체 제작 학습문항 · CC BY 4.0",
+    "id": "LOCAL-EXAMPLE-001",
+    "subject": "산업재해 예방 및 안전보건교육",
+    "topic": "위험 제거",
+    "question": "교육 전 실제 작업의 위험을 확인해야 하는 주된 이유는?",
+    "choices": [
+      "현장 조건에 맞는 예방 내용을 다루기 위해",
+      "교재 분량만 늘리기 위해",
+      "모든 교육을 없애기 위해",
+      "기록을 삭제하기 위해"
+    ],
+    "answer": 1,
+    "explanation": "안전교육은 실제 작업과 위험에 대응해야 한다. 등록 전에는 이 문항의 적용 조건과 정확성을 직접 검토해야 한다."
+  }
+]
