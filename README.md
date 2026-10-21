@@ -6,7 +6,7 @@
 
 ## 시험 규칙
 
-2026-10-21 Q-Net의 [산업안전기사 종목 1431](https://www.q-net.or.kr/crf005.do?id=crf00503&jmCd=1431) → 기본정보 → 취득방법을 직접 확인했습니다. [확인한 문구·해시](docs/official-rules-evidence.json), [앱 설정](src/qualification.ts)을 함께 보관합니다.
+2026-10-21 Q-Net의 [산업안전기사 종목 1431](https://www.q-net.or.kr/crf005.do?id=crf00503&jmCd=1431) → 시험정보 → 취득방법을 직접 확인했습니다. [확인한 문구·해시](docs/official-rules-evidence.json), [앱 설정](src/qualification.ts)을 함께 보관합니다.
 
 | 과목 | 한 회 출제 | 기본 은행 |
 | --- | ---: | ---: |

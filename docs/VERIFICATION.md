@@ -27,3 +27,19 @@
 ## CI와 공개 배포
 
 push/PR는 검증만 수행하고 배포 job은 main의 workflow_dispatch에서만 실행한다. 사용자 이번 요청이 실제 배포를 명시하여 에이전트 실행을 위임했다. 기본 스킬의 향후 사용자 수동 배포 정책은 그대로 보존한다. 정확한 실행 커밋·CI·공개 사이트 결과는 실행 후 기록한다.
+
+### 확정한 실행 기록
+
+- 구현 커밋: `81f7bdf2e7a00c26ff639a79cace804b00dfe7f7` (`main` 원격 반영 확인).
+- [push 검증 CI 39526154499](https://github.com/YunSangYeong/Industrial-Safety-Engineer-CBT/actions/runs/39526154499): GitHub API `status=completed`, `conclusion=success`, `headSha`가 위 커밋과 일치한다. npm ci·npm test·브라우저 설치·npm run test:e2e·Pages artifact 업로드 각 단계 성공을 확인했다. push 이벤트이므로 deploy job은 실행되지 않았다.
+- 로컬 최종 `npm run check`: 892개 통과, 타입 검사/빌드 exit 0. 로컬 최종 E2E: 28개 중 27개 통과·1개 해당 없음, exit 0. 테스트 수는 로컬 실제 출력 기준이다. CI 원시 로그 archive 다운로드는 별도 로그 호스트의 네트워크 제한으로 불가했으나 run/job API 성공 상태는 직접 조회했다.
+- 공식 문구의 실제 조회 URL 파라미터는 `jmInfoDivCcd=B0`이며 시험정보 → 취득방법이다. 후속 문서 정정은 원문 내용을 바꾸지 않고 증빙 URL의 실제 요청 파라미터와 메뉴 이름을 맞췄다.
+- 스킬 전체 파일은 읽기용 원본 복사본과 `diff -qr` 일치 확인. `git diff --check` 통과.
+- **공개 배포 차단:** Pages 최초 활성화 `POST /repos/YunSangYeong/Industrial-Safety-Engineer-CBT/pages` (`build_type=workflow`)는 GitHub 연동의 `Resource not accessible by integration` HTTP 403. 저장소의 읽기·push·CI와 Pages 관리 권한은 별개다. 이 오류는 샌드박스 자동 승인 거절이 아니다.
+- `GET /pages`는 404, 공개 주소 https://YunSangYeong.github.io/Industrial-Safety-Engineer-CBT/ 도 HTTP 404를 확인했다. 공개 사이트 동작 검증·배포 성공은 **미완료**다. 비밀값이나 새 토큰을 요구하지 않는다.
+- 사용자 조치: 저장소 Settings → Pages → Source를 **GitHub Actions**로 활성화한다. 이후 Actions → **Test and deploy GitHub Pages** → **Run workflow** (`main`) 또는 `gh workflow run pages.yml --ref main`으로 검증 후 배포한다. 사용자가 활성화 완료를 알려주면 위임받은 실제 배포를 이어갈 수 있다.
+- 이 실행 기록·출처 URL 정정만 담은 후속 커밋은 `[skip ci]`를 사용한다. 애플리케이션·문항·테스트·배포 workflow는 위 성공 CI 커밋과 동일하며 문서 변경 때문에 같은 테스트를 중복 실행하지 않는다. 최종 커밋 자체의 새 CI는 미실행이다.
+
+### 클라우드 재사용 설정
+
+`install_script`에 실제 성공한 npm ci(쓰기 가능한 /tmp cache)와 npm run check를 저장했다. `start_skill`에 기존 체크아웃 사용·AGENTS/스킬 읽기·개발서버 재시작·HTTP 확인·로컬/CI 브라우저 명령·데이터 보존·배포 정책을 저장했다. 초안 저장 성공은 환경 게시와 다르며, 사용자 환경 설정에서 검토·저장 후 게시할 수 있다. 실행 중 개발서버는 새 작업에서 재시작해야 한다.
